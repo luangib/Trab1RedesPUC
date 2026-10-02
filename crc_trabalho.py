@@ -10,7 +10,7 @@ def calcular_crc_passo_a_passo(mensagem):
     dividendo = mensagem + ("0" * r)
     lista_dividendo = list(dividendo)
     
-    print("\n CÁLCULO DO CRC (QUESTÃO 1) ---")
+    print("\n--- PASSO 2: CÁLCULO DO CRC (QUESTÃO 1) ---")
     print(f"Mensagem original (k bits): {mensagem}")
     print(f"Divisor (Polinômio Gerador): {divisor}")
     print(f"Dividendo (Mensagem + {r} zeros): {dividendo}\n")
@@ -38,30 +38,19 @@ def calcular_crc_passo_a_passo(mensagem):
     return resto
 
 def exibir_esquema_lfsr():
-    print("\n--- LFSR SIMPLIFICADO (QUESTÃO 2) ---")
-    print("graph LR")
-    print("    I(( I )) --> XOR_F((+))")
-    print("    R5[R5] -->|Realimentação| XOR_F")
-    print("    XOR_F --> R0[R0]")
-    print("    R0 --> XOR_1((+))")
-    print("    XOR_F -->|F| XOR_1")
-    print("    XOR_1 --> R1[R1]")
-    print("    R1 --> XOR_2((+))")
-    print("    XOR_F -->|F| XOR_2")
-    print("    XOR_2 --> R2[R2]")
-    print("    R2 --> R3[R3]")
-    print("    R3 --> XOR_4((+))")
-    print("    XOR_F -->|F| XOR_4")
-    print("    XOR_4 --> R4[R4]")
-    print("    R4 --> R5")
-    print("```")
+    print("\n--- PASSO 3: LFSR SIMPLIFICADO (QUESTÃO 2) ---")
+    print("Descrição da topologia do circuito para o polinômio gerador X^6 + X^4 + X^2 + X + 1:")
+    print("1. O circuito é conectado por meio de flip-flops (registradores de R5 a R0).")
+    print("2. O sinal de realimentação (F) é calculado a cada ciclo pelo XOR entre o bit de entrada que está chegando (I) e o bit armazenado no último registrador (R5).")
+    print("3. As portas lógicas XOR são posicionadas de acordo com os coeficientes ativos do polinômio gerador.")
+    print("4. Consequentemente, insere-se uma porta XOR recebendo o sinal de realimentação antes da entrada dos registradores R4, R2, R1 e R0.")
 
 def simular_lfsr_tabela(mensagem):
     r = [0, 0, 0, 0, 0, 0]
     
     entrada_completa = mensagem
     
-    print("\n--- QUADRO DE EVOLUÇÃO DO LFSR (QUESTÃO 3) ---")
+    print("\n--- PASSO 4: QUADRO DE EVOLUÇÃO DO LFSR (QUESTÃO 3) ---")
     print("| Ciclo | Entrada (I) | R5 | R4 | R3 | R2 | R1 | R0 |")
     print("|-------|-------------|----|----|----|----|----|----|")
     print(f"|   0   |      -      |  {r[5]} |  {r[4]} |  {r[3]} |  {r[2]} |  {r[1]} |  {r[0]} |")
@@ -99,7 +88,9 @@ if __name__ == "__main__":
     print(f"Mensagem Definida (32 bits): {mensagem_sorteada}")
     
     resto_divisao = calcular_crc_passo_a_passo(mensagem_sorteada)
+    
     exibir_esquema_lfsr()
+    
     resto_lfsr = simular_lfsr_tabela(mensagem_sorteada)
     
     print("\n========================================")
